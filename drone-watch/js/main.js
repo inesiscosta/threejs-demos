@@ -124,10 +124,7 @@ function createGUI() {
       "6 – Mobile": 5,
     })
     .name("Active Camera")
-    .onChange((v) => {
-      activeCamIdx = v;
-      updateHUD();
-    });
+    .onChange((v) => selectCamera(v));
 
   const viewFolder = gui.addFolder("View");
   helpersCtrl = viewFolder
@@ -183,6 +180,14 @@ function exportDroneWatch() {
 //////////////////////
 /* SCENE OPERATIONS */
 //////////////////////
+function selectCamera(idx) {
+  freeCamActive = false;
+  orbitControls.enabled = false;
+  activeCamIdx = idx;
+  guiParams.camera = idx;
+  cameraCtrl.updateDisplay();
+}
+
 function applyHelpers() {
   cameraHelpers.forEach((h) => (h.visible = helpersVisible));
   balloons.forEach((b) => b.setHelpersVisible(helpersVisible));
@@ -467,46 +472,12 @@ function onKeyDown(e) {
       orbitControls.enabled = freeCamActive;
       break;
     case "1":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 0;
-      guiParams.camera = 0;
-      cameraCtrl.updateDisplay();
-      break;
     case "2":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 1;
-      guiParams.camera = 1;
-      cameraCtrl.updateDisplay();
-      break;
     case "3":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 2;
-      guiParams.camera = 2;
-      cameraCtrl.updateDisplay();
-      break;
     case "4":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 3;
-      guiParams.camera = 3;
-      cameraCtrl.updateDisplay();
-      break;
     case "5":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 4;
-      guiParams.camera = 4;
-      cameraCtrl.updateDisplay();
-      break;
     case "6":
-      freeCamActive = false;
-      orbitControls.enabled = false;
-      activeCamIdx = 5;
-      guiParams.camera = 5;
-      cameraCtrl.updateDisplay();
+      selectCamera(Number(key) - 1);
       break;
     case "h":
       helpersVisible = !helpersVisible;
