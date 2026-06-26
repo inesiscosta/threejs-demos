@@ -416,6 +416,11 @@ function init() {
   window.addEventListener("resize", onResize);
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("keyup", onKeyUp);
+  // keyup never fires for keys still held when the tab loses focus
+  window.addEventListener("blur", () => {
+    keysDown.clear();
+    updateHUD();
+  });
 }
 
 /////////////////////
