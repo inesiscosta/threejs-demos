@@ -77,7 +77,6 @@ const droneAngles = new THREE.Vector3(); // x = pitch, y = yaw, z = roll
 /* CREATE SCENE(S) */
 /////////////////////
 function createScene() {
-  "use strict";
   scene = new THREE.Scene();
   scene.background = new THREE.Color(BG_COLOR);
 
@@ -90,7 +89,6 @@ function createScene() {
 /* CREATE OBJECT3D(S) */
 ////////////////////////
 function createBalloons() {
-  "use strict";
   for (let i = 0; i < BALLOON_COUNT; i++) {
     const x = (Math.random() - 0.5) * BALLOON_SPREAD_XZ;
     const y = BALLOON_Y_MIN + Math.random() * BALLOON_Y_SPREAD;
@@ -103,7 +101,6 @@ function createBalloons() {
 /* CREATE STATS & GUI */
 ///////////////////////
 function createStats() {
-  "use strict";
   stats = new Stats();
   stats.showPanel(0); // 0 = FPS
   stats.dom.style.position = "absolute";
@@ -114,7 +111,6 @@ function createStats() {
 }
 
 function createGUI() {
-  "use strict";
   gui = new GUI({ title: "Scene Controls" });
 
   const camFolder = gui.addFolder("Camera");
@@ -166,7 +162,6 @@ function createGUI() {
 }
 
 function exportDroneWatch() {
-  "use strict";
   const exporter = new GLTFExporter();
   exporter.parse(
     droneWatch.object,
@@ -189,14 +184,12 @@ function exportDroneWatch() {
 /* SCENE OPERATIONS */
 //////////////////////
 function applyHelpers() {
-  ("use strict");
   cameraHelpers.forEach((h) => (h.visible = helpersVisible));
   balloons.forEach((b) => b.setHelpersVisible(helpersVisible));
   if (droneWatch) droneWatch.setHelpersVisible(helpersVisible);
 }
 
 function applyWireframe() {
-  "use strict";
   balloons.forEach((b) =>
     b.getMeshes().forEach((m) => (m.material.wireframe = wireframe)),
   );
@@ -235,7 +228,6 @@ function updateHUD() {
 /* CHECK COLLISIONS */
 //////////////////////
 function checkCollisions() {
-  "use strict";
   if (collisionAnimating || !droneWatch) return;
 
   const rotorPos = new THREE.Vector3();
@@ -318,7 +310,6 @@ function clampDronePositionToRotorBounds(rotationMatrix) {
 /* HANDLE COLLISIONS */
 ///////////////////////
 function handleCollisions() {
-  "use strict";
   if (collisionAnimating && !balloons.some((b) => b.isPopping)) {
     collisionAnimating = false;
   }
@@ -328,7 +319,6 @@ function handleCollisions() {
 /* UPDATE */
 ////////////
 function updateDroneWatch(dt) {
-  "use strict";
   if (!droneWatch || collisionAnimating) return;
   if (!droneWatch.arms.every((a) => a.isFullyExtended())) return;
 
@@ -373,7 +363,6 @@ function updateDroneWatch(dt) {
 }
 
 function update(dt) {
-  "use strict";
   balloons.forEach((b) => b.update(dt));
   if (droneWatch) droneWatch.update(dt);
   updateDroneWatch(dt);
@@ -385,7 +374,6 @@ function update(dt) {
 /* DISPLAY */
 /////////////
 function render() {
-  "use strict";
   renderer.render(scene, freeCamActive ? freeCamera : cameras[activeCamIdx]);
 }
 
@@ -393,7 +381,6 @@ function render() {
 /* INITIALIZE ANIMATION CYCLE */
 ////////////////////////////////
 function init() {
-  "use strict";
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
@@ -430,7 +417,6 @@ function init() {
 /* ANIMATION CYCLE */
 /////////////////////
 function animate(timestamp) {
-  "use strict";
   stats.begin();
   requestAnimationFrame(animate);
   const dt = Math.min((timestamp - prevTime) / 1000, MAX_DT);
@@ -445,7 +431,6 @@ function animate(timestamp) {
 /* RESIZE WINDOW CALLBACK */
 ////////////////////////////
 function onResize() {
-  "use strict";
   const aspect = window.innerWidth / window.innerHeight;
   const hs = FRUSTUM_SIZE / 2;
   const hw = hs * aspect;
@@ -471,7 +456,6 @@ function onResize() {
 /* KEY DOWN CALLBACK */
 ///////////////////////
 function onKeyDown(e) {
-  "use strict";
   if (e.repeat) return;
   if (collisionAnimating) return;
   const key = e.key.toLowerCase();
@@ -547,7 +531,6 @@ function onKeyDown(e) {
 /* KEY UP CALLBACK   */
 ///////////////////////
 function onKeyUp(e) {
-  "use strict";
   keysDown.delete(e.key.toLowerCase());
   updateHUD();
 }

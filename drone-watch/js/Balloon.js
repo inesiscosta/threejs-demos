@@ -6,7 +6,6 @@ import { BALLOON_RADIUS, KNOT_RADIUS, KNOT_HEIGHT, RIBBON_RADIUS, RIBBON_HEIGHT,
 
 class Balloon {
     constructor(scene, x, y, z) {
-        'use strict';
         this.scene = scene;
 
         const bodyMat = new THREE.MeshBasicMaterial({ color: BALLOON_COLOR });
@@ -82,7 +81,6 @@ class Balloon {
     }
 
     update(dt) {
-        'use strict';
         if (!this.isPopping) return;
         this.popTimer += dt;
         const t = Math.min(this.popTimer / POP_DURATION, 1);
