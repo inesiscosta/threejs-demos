@@ -54,6 +54,13 @@ const keysDown = new Set();
 const worldUp = new THREE.Vector3(0, 1, 0);
 const rotorLocalOffset = new THREE.Vector3();
 const rotorWorldOffset = new THREE.Vector3();
+// Scratch objects reused every frame to avoid per-frame allocations
+const rotorPos = new THREE.Vector3();
+const balloonPos = new THREE.Vector3();
+const yawMatrix = new THREE.Matrix4();
+const pitchMatrix = new THREE.Matrix4();
+const rotationMatrix = new THREE.Matrix4();
+const translationMatrix = new THREE.Matrix4();
 const rotorBounds = {
   xMin: 0,
   xMax: 0,
@@ -235,8 +242,6 @@ function updateHUD() {
 function checkCollisions() {
   if (collisionAnimating || !droneWatch) return;
 
-  const rotorPos = new THREE.Vector3();
-  const balloonPos = new THREE.Vector3();
   const collisionDist = ROTOR_RADIUS + ROTOR_TUBE + BALLOON_RADIUS;
 
   for (const arm of droneWatch.arms) {
@@ -348,23 +353,19 @@ function updateDroneWatch(dt) {
   );
 
   // Build rotation matrices: yaw (θ₁) then pitch (θ₂)
-  const Ry = new THREE.Matrix4().makeRotationY(droneAngles.y);
-  const Rx = new THREE.Matrix4().makeRotationX(droneAngles.x);
+  yawMatrix.makeRotationY(droneAngles.y);
+  pitchMatrix.makeRotationX(droneAngles.x);
 
   // Compose: R = Ry * Rx  (yaw → pitch)
-  const R = new THREE.Matrix4().multiplyMatrices(Ry, Rx);
+  rotationMatrix.multiplyMatrices(yawMatrix, pitchMatrix);
 
-  clampDronePositionToRotorBounds(R);
+  clampDronePositionToRotorBounds(rotationMatrix);
 
   // Build translation matrix
-  const T = new THREE.Matrix4().makeTranslation(
-    dronePos.x,
-    dronePos.y,
-    dronePos.z,
-  );
+  translationMatrix.makeTranslation(dronePos.x, dronePos.y, dronePos.z);
 
   // Final transform M = T * R — apply directly, bypassing Three.js auto-update
-  droneWatch.object.matrix.multiplyMatrices(T, R);
+  droneWatch.object.matrix.multiplyMatrices(translationMatrix, rotationMatrix);
 }
 
 function update(dt) {
