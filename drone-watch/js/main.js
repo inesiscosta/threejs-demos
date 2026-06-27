@@ -193,6 +193,13 @@ function selectCamera(idx) {
   activeCamIdx = idx;
   guiParams.camera = idx;
   cameraCtrl.updateDisplay();
+  updateHUD();
+}
+
+function toggleFreeCamera() {
+  freeCamActive = !freeCamActive;
+  orbitControls.enabled = freeCamActive;
+  updateHUD();
 }
 
 function applyHelpers() {
@@ -220,6 +227,15 @@ function setHudActive(id, active) {
 }
 
 function updateHUD() {
+  // Highlight the camera currently being rendered
+  for (let i = 0; i < 6; i++) {
+    document
+      .getElementById(`hud-cam-${i + 1}`)
+      ?.classList.toggle("current", !freeCamActive && activeCamIdx === i);
+  }
+  document
+    .getElementById("hud-cam-free")
+    ?.classList.toggle("current", freeCamActive);
   // Camera rows — highlight while held
   for (let i = 0; i < 6; i++) {
     setHudActive(`hud-cam-${i + 1}`, keysDown.has(String(i + 1)));
@@ -474,8 +490,7 @@ function onKeyDown(e) {
 
   switch (key) {
     case "0":
-      freeCamActive = !freeCamActive;
-      orbitControls.enabled = freeCamActive;
+      toggleFreeCamera();
       break;
     case "1":
     case "2":
@@ -499,6 +514,7 @@ function onKeyDown(e) {
       break;
     case "q":
       if (droneWatch) droneWatch.extend();
+      document.getElementById("hint")?.classList.add("hidden");
       break;
   }
   updateHUD();
@@ -513,4 +529,5 @@ function onKeyUp(e) {
 }
 
 init();
+updateHUD();
 requestAnimationFrame(animate);

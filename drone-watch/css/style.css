@@ -74,3 +74,38 @@ kbd.active {
 .hud-row:has(kbd.active) {
     color: #fff;
 }
+
+/* Currently selected camera */
+.hud-row.current {
+    color: #7cfc00;
+}
+
+/* ── Start hint & touch notice ──────────────────── */
+#hint,
+#touch-note {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    max-width: calc(100% - 32px);
+    padding: 8px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #ddd;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5px;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    z-index: 10;
+}
+
+#hint.hidden { opacity: 0; }
+
+#touch-note { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+    #hint { display: none; }
+    #touch-note { display: block; }
+}
