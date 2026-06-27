@@ -8,8 +8,6 @@ import {
 
 class Rotor {
   constructor(parent, x = 0, y = 0, z = 0) {
-    this.parent = parent;
-
     // Caixilharia — outer guard ring, flat on XZ plane
     this.caixilharia = new THREE.Mesh(
       new THREE.TorusGeometry(ROTOR_RADIUS, ROTOR_TUBE, 30, 4),
@@ -47,10 +45,6 @@ class Rotor {
 
   setHelpersVisible(visible) {
     this.axesHelper.visible = visible;
-  }
-
-  remove() {
-    this.parent.remove(this.object);
   }
 
   update(dt) {

@@ -7,8 +7,6 @@ import {
   CAM_FIXED_POS,
   CAM_PERSP_FOV,
   CAM_MOBILE_FOV,
-  CAM_MOBILE_POS,
-  CAM_MOBILE_TARGET,
 } from "./constants.js";
 
 export function createCameras(scene, helpersVisible) {
@@ -37,10 +35,8 @@ export function createCameras(scene, helpersVisible) {
   camPerspFixed.position.set(...CAM_FIXED_POS);
   camPerspFixed.lookAt(0, 0, 0);
 
-  // Camera 6 — mobile perspective, top rim of DroneWatch
+  // Camera 6 — mobile perspective, posed by DroneWatch.attachMobileCamera()
   const camMobile = new THREE.PerspectiveCamera(CAM_MOBILE_FOV, aspect, CAM_NEAR, CAM_FAR);
-  camMobile.position.set(...CAM_MOBILE_POS);
-  camMobile.lookAt(...CAM_MOBILE_TARGET);
 
   const cameras = [camTop, camSide, camFront, camOrthoFixed, camPerspFixed, camMobile];
 

@@ -1,9 +1,4 @@
-// ── Main Script (cont.) ─────────────────────────────────────────────────────
-export const WORLD_UP = [0, 1, 0];
-// ── Main Script ─────────────────────────────────────────────────────────────
-export const CAMERA_MOVE_SPEED = 18;
-export const CAMERA_ROTATE_SPEED = Math.PI;
-export const MOBILE_CAMERA_IDX = 5;
+// ── Movement limits ──────────────────────────────────────────────────────────
 export const AMPLITUDE_PITCH = [-60, 60];
 export const AMPLITUDE_X = [-50, 50];
 export const AMPLITUDE_Y = [-50, 50];
@@ -11,12 +6,6 @@ export const AMPLITUDE_Z = [-50, 50];
 
 // ── Scene ────────────────────────────────────────────────────────────────────
 export const BG_COLOR = 0x222222;
-
-// ── Lights ───────────────────────────────────────────────────────────────────
-export const LIGHT_COLOR = 0xffffff;
-export const AMBIENT_INTENSITY = 0.5;
-export const SUN_INTENSITY = 1.0;
-export const SUN_POS = [10, 20, 10];
 
 // ── Cameras ──────────────────────────────────────────────────────────────────
 export const FRUSTUM_SIZE = 80; // ortho camera half-height (world units)
@@ -26,8 +15,6 @@ export const CAM_ORTHO_DIST = 150; // how far axis-aligned cameras sit from orig
 export const CAM_FIXED_POS = [80, 80, 80]; // shared position for cams 4 & 5
 export const CAM_PERSP_FOV = 60; // fixed perspective camera FOV (degrees)
 export const CAM_MOBILE_FOV = 75; // onboard (watch) camera FOV
-export const CAM_MOBILE_POS = [0, 2.2, -0.5];
-export const CAM_MOBILE_TARGET = [0, 2.0, 10];
 export const DEFAULT_CAM_IDX = 4; // 0-indexed; camera 5 on startup
 
 // ── Balloon geometry ─────────────────────────────────────────────────────────

@@ -47,9 +47,6 @@ class Balloon {
 
         scene.add(this.group);
 
-        // Bounding sphere radius for collision detection
-        this.collisionRadius = BALLOON_RADIUS;
-
         this.isAlive = true;
         this.isPopping = false;
         this.popTimer = 0;
@@ -58,13 +55,6 @@ class Balloon {
     pop() {
         this.isPopping = true;
         this.popTimer = 0;
-    }
-
-    /** Returns the balloon body's world-space position. */
-    getWorldPosition() {
-        const pos = new THREE.Vector3();
-        this.group.getWorldPosition(pos);
-        return pos;
     }
 
     getMeshes() {
