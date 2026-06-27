@@ -50,7 +50,8 @@ class DroneWatch {
   attachMobileCamera(camera) {
     this.droneCenter.add(camera);
     camera.position.set(0, WATCH_BODY_HEIGHT / 2 + 0.8, WATCH_BODY_SIZE / 2);
-    camera.rotation.set(0, 0, 0);
+    // Cameras look down -Z; turn it around so it faces out from the +Z rim
+    camera.rotation.set(0, Math.PI, 0);
   }
 
   getMeshes() {
