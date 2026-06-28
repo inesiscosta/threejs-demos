@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <title>Trabalho C - CG</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="hud">
+      <!-- Models -->
+      <div class="hud-panel">
+        <div class="hud-label">MODELS</div>
+        <div class="hud-buttons">
+          <button class="hud-btn toggle" id="model-btn-0">Artemis</button>
+          <button class="hud-btn toggle" id="model-btn-1">Cat</button>
+          <button class="hud-btn toggle" id="model-btn-2">Tesseract</button>
+        </div>
+      </div>
+
+      <div class="hud-divider"></div>
+
+      <!-- Lights -->
+      <div class="hud-panel">
+        <div class="hud-label">LIGHTS</div>
+        <div class="hud-buttons">
+          <button class="hud-btn toggle" id="light-directional">DIR</button>
+          <button class="hud-btn toggle" id="light-point">PNT</button>
+          <button class="hud-btn toggle" id="light-spot">SPT</button>
+          <button class="hud-btn toggle active" id="mat-lighting">LIT</button>
+        </div>
+      </div>
+
+      <div class="hud-divider"></div>
+
+      <!-- Materials -->
+      <div class="hud-panel">
+        <div class="hud-label">MATERIAL</div>
+        <div class="hud-buttons">
+          <button class="hud-btn toggle active" id="mat-btn-0">
+            Lambert / Gouraud
+          </button>
+          <button class="hud-btn toggle" id="mat-btn-1">Phong</button>
+        </div>
+      </div>
+
+      <div class="hud-divider"></div>
+
+      <!-- Effects -->
+      <div class="hud-panel">
+        <div class="hud-label">FX</div>
+        <div class="hud-buttons">
+          <button class="hud-btn toggle" id="fx-anaglyph">
+            Anaglyphic Effect
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
