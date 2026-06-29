@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "threejs",
+  "compatibility_date": "2026-10-01",
+  // Static only: each demo folder is served as-is at /<folder>/, no build step
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [{ "pattern": "threejs.inesiscosta.com", "custom_domain": true }]
+}

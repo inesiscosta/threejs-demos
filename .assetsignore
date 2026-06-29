@@ -1,0 +1,7 @@
+# Repo files that should not be served
+.git
+.gitignore
+.wrangler
+node_modules
+README.md
+wrangler.jsonc
