@@ -109,3 +109,23 @@ kbd.active {
     #hint { display: none; }
     #touch-note { display: block; }
 }
+
+/* ── Back to menu ───────────────────────────────── */
+#back {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    color: #ddd;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    pointer-events: auto;   /* the rest of the HUD ignores the mouse */
+    transition: color 0.1s, border-color 0.1s;
+}
+
+#back:hover,
+#back:focus-visible {
+    color: #7cfc00;
+    border-color: #7cfc00;
+    outline: none;
+}

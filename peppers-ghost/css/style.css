@@ -105,3 +105,24 @@ canvas {
   border-color: #7cfc00;
   color: #7cfc00;
 }
+
+/* ── Back to menu (link styled as a HUD button) ─── */
+a.hud-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+#back {
+  padding-left: 6px;
+  color: #ddd;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+#back:hover,
+#back:focus-visible {
+  color: #7cfc00;
+  border-color: #7cfc00;
+  outline: none;
+}
