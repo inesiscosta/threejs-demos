@@ -1,0 +1,29 @@
+name: Deploy
+
+# Manual only: run it from the Actions tab ("Run workflow")
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # The environment is what lists this under "Deployments" in the repo sidebar
+    environment:
+      name: production
+      url: https://threejs.inesiscosta.com
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.45.0"
+          command: deploy

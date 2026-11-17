@@ -5,3 +5,5 @@
 node_modules
 README.md
 wrangler.jsonc
+.github
+LICENSE
